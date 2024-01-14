@@ -48,6 +48,15 @@ body {
     font-family: "Roboto";
 }
 
+.po-text {
+    margin: 16px;
+    color: #000000;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 32px;
+    font-family: "Roboto";
+}
+
 .warning {
     color: #BC412E;
     font-weight: bold;

@@ -4,6 +4,9 @@ import com.tiscon.dao.EstimateDao;
 import com.tiscon.dto.UserOrderDto;
 import com.tiscon.form.UserOrderForm;
 import com.tiscon.service.EstimateService;
+
+import java.nio.DoubleBuffer;
+
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,6 +15,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import com.tiscon.code.PackageType;
+import com.tiscon.code.OptionalServiceType;
 
 /**
  * 引越し見積もりのコントローラークラス。
@@ -140,12 +144,27 @@ public class EstimateController {
         Integer boxCountBed = estimateService.getBoxForPackage(dto.getBed(), PackageType.BED);
         Integer boxCountBicycle = estimateService.getBoxForPackage(dto.getBicycle(), PackageType.BICYCLE);
         Integer boxCountWashingMachine = estimateService.getBoxForPackage(dto.getWashingMachine(), PackageType.WASHING_MACHINE);
+        Integer boxCountBox = estimateService.getBoxForPackage(dto.getBox(), PackageType.BOX);
+        Integer BoxSum =  boxCountBed + boxCountBicycle + boxCountWashingMachine + boxCountBox;
+        Double distance = estimateDAO.getDistance(dto.getOldPrefectureId(), dto.getNewPrefectureId());
+        int distanceInt = (int) Math.floor(distance);
+        int PRICE_PER_DISTANCE = 100;
+        int priceForDistance = distanceInt * PRICE_PER_DISTANCE;
+        int priceForOptionalService = 0;
+
+        if (dto.getWashingMachineInstallation()) {
+            priceForOptionalService = estimateDAO.getPricePerOptionalService(OptionalServiceType.WASHING_MACHINE.getCode());
+        }
         model.addAttribute("prefectures", estimateDAO.getAllPrefectures());
         model.addAttribute("userOrderForm", userOrderForm);
         model.addAttribute("price", price);
         model.addAttribute("boxCountBed", boxCountBed);
         model.addAttribute("boxCountBicycle", boxCountBicycle);
         model.addAttribute("boxCountWashingMachine", boxCountWashingMachine);
+        model.addAttribute("boxCountBox", boxCountBox);
+        model.addAttribute("BoxSum", BoxSum);
+        model.addAttribute("priceForDistance", priceForDistance);
+        model.addAttribute("priceForOptionalService", priceForOptionalService);
         return "result";
     }
 

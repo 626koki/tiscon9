@@ -20,10 +20,16 @@
     <div class="page-title">概算お見積り結果</div>
     <div class="col-sm-12">
       <div class="text-center">
-        <div class="primary-text">ベッド<span th:text="${price}"></span>円</div>
-        <div class="primary-text"><span th:text="${boxCountBed}"></span>個</div>
-        <div class="primary-text"><span th:text="${boxCountBicycle}"></span>個</div>
-        <div class="primary-text"><span th:text="${boxCountWashingMachine}"></span>個</div>
+        <div class="primary-text">合計金額<span th:text="${price}"></span>円</div>
+        <div class="po-text">＜内訳＞</div>
+        <div class="po-text">距離料金：<span th:text="${priceForDistance}"></span>円</div>
+        <div class="po-text">（段ボール80個以内:3万円、200個以内:5万円）</div>
+        <div class="po-text">合計段ボール数：<span th:text="${BoxSum}"></span>個</div>
+        <div class="po-text">段ボール：<span th:text="${boxCountBox}"></span>個</div>
+        <div class="po-text">ベッド：<span th:text="${boxCountBed}"></span>個</div>
+        <div class="po-text">自転車：<span th:text="${boxCountBicycle}"></span>個</div>
+        <div class="po-text">洗濯機：<span th:text="${boxCountWashingMachine}"></span>個</div>
+        <div class="po-text">オプション料金：<span th:text="${priceForOptionalService}"></span>円</div>mvn
         <button type="submit" name="complete" class="btn btn-primary">詳細見積もり依頼へ</button>
       </div>
       <div class="sub-title">お客様情報</div>

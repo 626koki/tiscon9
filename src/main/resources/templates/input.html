@@ -33,14 +33,14 @@
             </ul>
         </div>
         <div class="form-group">
-          <label for="tel">連絡先TEL</label>
+          <label for="tel">連絡先TEL（半角数字で入力してください）</label>
           <input type="tel" id="tel" name="tel" th:field="*{tel}" class="form-control" value="03-1234-5678"/>
             <ul th:if="${#fields.hasErrors('tel')}">
               <li th:each="err : ${#fields.errors('tel')}" class="warning" th:text="${err}"></li>
             </ul>
         </div>
         <div class="form-group">
-          <label for="email">連絡先メールアドレス</label>
+          <label for="email">連絡先メールアドレス（半角数字で入力してください）</label>
           <input type="text" id="email" name="email" th:field="*{email}" class="form-control" value="test@test.com"/>
            <ul th:if="${#fields.hasErrors('email')}">
             <li th:each="err : ${#fields.errors('email')}" class="warning" th:text="${err}"></li>
@@ -83,7 +83,7 @@
         </div>
       </fieldset>
       <fieldset>
-      <div class="sub-title">お荷物情報</div>
+      <div class="sub-title">お荷物情報（半角数字で入力してください）</div>
         <div class="form-group">
           <label for="box">段ボールの個数</label>
           <input type="text" id="box" name="box" th:field="*{box}" class="form-control" value="10"/>
