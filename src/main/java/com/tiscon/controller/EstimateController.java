@@ -138,11 +138,14 @@ public class EstimateController {
         BeanUtils.copyProperties(userOrderForm, dto);
         Integer price = estimateService.getPrice(dto);
         Integer boxCountBed = estimateService.getBoxForPackage(dto.getBed(), PackageType.BED);
-
+        Integer boxCountBicycle = estimateService.getBoxForPackage(dto.getBicycle(), PackageType.BICYCLE);
+        Integer boxCountWashingMachine = estimateService.getBoxForPackage(dto.getWashingMachine(), PackageType.WASHING_MACHINE);
         model.addAttribute("prefectures", estimateDAO.getAllPrefectures());
         model.addAttribute("userOrderForm", userOrderForm);
         model.addAttribute("price", price);
         model.addAttribute("boxCountBed", boxCountBed);
+        model.addAttribute("boxCountBicycle", boxCountBicycle);
+        model.addAttribute("boxCountWashingMachine", boxCountWashingMachine);
         return "result";
     }
 
