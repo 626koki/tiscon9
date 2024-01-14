@@ -102,7 +102,7 @@ public class EstimateService {
      * @param type       荷物の種類
      * @return 段ボール数
      */
-    private int getBoxForPackage(int packageNum, PackageType type) {
+    public int getBoxForPackage(int packageNum, PackageType type) {
         return packageNum * estimateDAO.getBoxPerPackage(type.getCode());
     }
 }

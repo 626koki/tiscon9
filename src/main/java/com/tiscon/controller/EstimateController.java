@@ -11,6 +11,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import com.tiscon.code.PackageType;
 
 /**
  * 引越し見積もりのコントローラークラス。
@@ -131,10 +132,12 @@ public class EstimateController {
         UserOrderDto dto = new UserOrderDto();
         BeanUtils.copyProperties(userOrderForm, dto);
         Integer price = estimateService.getPrice(dto);
+        Integer boxCountBed = estimateService.getBoxForPackage(dto.getBed(), PackageType.BED);
 
         model.addAttribute("prefectures", estimateDAO.getAllPrefectures());
         model.addAttribute("userOrderForm", userOrderForm);
         model.addAttribute("price", price);
+        model.addAttribute("boxCountBed", boxCountBed);
         return "result";
     }
 
